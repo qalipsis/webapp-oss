@@ -1,7 +1,7 @@
 <template>
     <div :class="[{ 'border-gray-300': active, 'border-transparent': !active}, TailwindClassHelper.searchInputBaseClass]">
         <input
-            class="h-9 border-none outline-none transition-width duration-300 rounded-md"
+            class="h-9 border-none outline-none transition-width duration-300 rounded-md bg-white dark:bg-gray-900"
             :class="active ? 'w-40 px-2' : 'p-0 w-0'"
             type="text"
             v-model="searchTerm"

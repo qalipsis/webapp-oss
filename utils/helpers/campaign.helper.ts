@@ -2,6 +2,50 @@ import type { ApexOptions } from "apexcharts";
 import { eachDayOfInterval, format, isSameDay, sub } from "date-fns";
 import { DateTime } from "luxon";
 import tinycolor from "tinycolor2";
+import type { TagStyleClass } from "../types/common";
+
+const defaultTagClass: TagStyleClass = {
+  backgroundCssClass: "bg-gray-100 dark:bg-gray-700",
+  textCssClass: "text-gray-700 dark:text-gray-100",
+}
+
+const tagClass: { [key in ExecutionStatus]: Tag } = {
+  SUCCESSFUL: {
+    text: "Successful",
+    backgroundCssClass: "bg-green-100 dark:bg-green-800",
+    textCssClass: "text-green-600 dark:text-green-100"
+  },
+  WARNING: {
+    text: "Warning",
+    backgroundCssClass: "bg-yellow-100 dark:bg-yellow-800",
+    textCssClass: "text-yellow-400 dark:text-yellow-100"
+  },
+  FAILED: {
+    text: "Failed",
+    backgroundCssClass: "bg-red-100 dark:bg-red-800",
+    textCssClass: "text-red-600 dark:text-red-100",
+  },
+  ABORTED: {
+    text: "Aborted",
+    backgroundCssClass: "bg-red-100 dark:bg-red-800",
+    textCssClass: "text-red-600 dark:text-red-100",
+  },
+  SCHEDULED: {
+    text: "Scheduled",
+    backgroundCssClass: "bg-gray-100 dark:bg-gray-700",
+    textCssClass: "text-green-600 dark:text-green-100"
+  },
+  QUEUED: {
+    text: "Queued",
+    backgroundCssClass: "bg-purple-100 dark:bg-purple-800",
+    textCssClass: "text-purple-600 dark:text-purple-100",
+  },
+  IN_PROGRESS: {
+    text: "In progress",
+    backgroundCssClass: "bg-purple-100 dark:bg-purple-800",
+    textCssClass: "text-purple-600 dark:text-purple-100",
+  },
+};
 
 const renderCampaignDetailsChartTooltip: (options: any) => any = ({
   seriesIndex,
@@ -328,55 +372,12 @@ export class CampaignHelper {
   }
 
   static toExecutionStatusTag(executionStatus: ExecutionStatus): Tag {
-    switch (executionStatus) {
-      case ExecutionStatusConstant.SUCCESSFUL:
-        return {
-          text: "Successful",
-          textCssClass: "text-green-600",
-          backgroundCssClass: "bg-primary-100",
-        };
-      case ExecutionStatusConstant.FAILED:
-        return {
-          text: "Failed",
-          textCssClass: "text-red-600",
-          backgroundCssClass: "bg-red-100",
-        };
-      case ExecutionStatusConstant.IN_PROGRESS:
-        return {
-          text: "In progress",
-          textCssClass: "text-purple-600",
-          backgroundCssClass: "bg-purple-100",
-        };
-      case ExecutionStatusConstant.SCHEDULED:
-        return {
-          text: "Scheduled",
-          textCssClass: "text-green-600",
-          backgroundCssClass: "bg-gray-100",
-        };
-      case ExecutionStatusConstant.WARNING:
-        return {
-          text: "Warning",
-          textCssClass: "text-yellow-400",
-          backgroundCssClass: "bg-yellow-200",
-        };
-      case ExecutionStatusConstant.ABORTED:
-        return {
-          text: "Aborted",
-          textCssClass: "text-red-600",
-          backgroundCssClass: "bg-red-100",
-        };
-      case ExecutionStatusConstant.QUEUED:
-        return {
-          text: "Queued",
-          textCssClass: "text-purple-600",
-          backgroundCssClass: "bg-purple-100",
-        };
-      default:
-        return {
-          text: executionStatus,
-          textCssClass: "text-grey",
-          backgroundCssClass: "bg-gray-100",
-        };
+    const tag: Tag = tagClass[executionStatus] ?? {
+      text: executionStatus,
+      backgroundCssClass: defaultTagClass.backgroundCssClass,
+      textCssClass: defaultTagClass.textCssClass
     }
+
+    return tag
   }
 }

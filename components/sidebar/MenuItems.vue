@@ -1,5 +1,5 @@
 <template>
-    <section class="text-primary-950">
+    <section class="text-primary-950 dark:text-primary-400">
         <div 
             class="flex items-center pl-3 h-28 cursor-pointer w-full"
             @mouseenter="hoveredMenuItemId = ''"
@@ -30,11 +30,11 @@
                         @mouseenter="hoveredMenuItemId = menuItem.id"
                     >
                         <div 
-                            class="peer relative hover:bg-primary-50"
+                            class="peer relative hover:bg-primary-50 dark:hover:bg-gray-800"
                             @click="!menuItem.subMenuItems && handleMenuItemClick(menuItem.id, menuItem.path)"
                         >
                             <div
-                                class="flex items-center h-16 cursor-pointer pl-4 text-primary-950"
+                                class="flex items-center h-16 cursor-pointer pl-4 text-primary-950 dark:text-gray-100"
                                 :class="[
                                     TailwindClassHelper.primaryColorFilterHoverClass,
                                     activeMenuItemId === menuItem.id

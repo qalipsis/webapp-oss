@@ -57,7 +57,7 @@
             <div>
               <input
                 type="text"
-                class="w-14 ml-1 py-1 px-2 outline-none border border-solid border-gray-200 rounded-md"
+                class="w-14 ml-1 py-1 px-2 outline-none border border-solid border-gray-200 rounded-md dark:bg-gray-950 dark:border-gray-700"
                 v-model="targetPage"
                 @keyup.enter="handleEnterEvent"
               />

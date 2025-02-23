@@ -42,7 +42,7 @@ export type {
   CampaignConfigurationForm
 } from "./types/campaign";
 export type { ChartData, ChartOptionData, ApexDataSeries } from "./types/chart";
-export type { Tag } from "./types/common";
+export type { Tag, TagStyleClass } from "./types/common";
 export type { CheckBoxExposeType } from "./types/checkbox";
 export type {
   DefaultCampaignConfiguration,
